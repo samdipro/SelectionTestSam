@@ -18,7 +18,7 @@ export default function CardPost() {
             alignItems={"center"}
           >
             <Avatar
-              src={userSelector.avatar_url}
+              // src={userSelector.avatar_url}
               width={"32px"}
               height={"32px"}
             ></Avatar>

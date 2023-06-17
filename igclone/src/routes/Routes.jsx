@@ -6,6 +6,7 @@ import ForgetPage from "../pages/ForgetPage";
 import ResetPage from "../pages/ResetPage";
 import ProfilePage from "../pages/ProfilePage";
 import ProtectedPage from "./ProtectedPage";
+import Verify from "../pages/verify";
 
 const routes = [
   <Route
@@ -53,6 +54,14 @@ const routes = [
     element={
       <ProtectedPage guestOnly={true}>
         <ResetPage />
+      </ProtectedPage>
+    }
+  />,
+  <Route
+    path="/verify/:token"
+    element={
+      <ProtectedPage needLogin={true}>
+        <Verify />
       </ProtectedPage>
     }
   />,

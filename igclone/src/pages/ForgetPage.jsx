@@ -9,8 +9,26 @@ import {
 } from "@chakra-ui/react";
 import { TfiLock } from "react-icons/tfi";
 import logo from "../assets/ui/logo-text.svg";
+import { useState } from "react";
+import { api } from "../api/api";
 
 export default function ForgetPage() {
+  const [email, setEmail] = useState({
+    email: "",
+  });
+  function inputHandler(e) {
+    const { value, id } = e.target;
+    const tempEmail = { ...email };
+    tempEmail[id] = value;
+    setEmail(tempEmail);
+    console.log(email);
+  }
+  async function forget() {
+    await api.get("/user/forget", {
+      params: email,
+    });
+    alert("check your email, to reset the password");
+  }
   return (
     <>
       <Container
@@ -36,7 +54,12 @@ export default function ForgetPage() {
             account.
           </Box>
           <Box width={"100%"} padding={"0 16px"}>
-            <Input type="email" placeholder="your registered email" />
+            <Input
+              type="email"
+              placeholder="your registered email"
+              id="email"
+              onChange={inputHandler}
+            />
           </Box>
           <Flex flexDir={"column"} gap={"8px"}>
             <Button
@@ -49,6 +72,7 @@ export default function ForgetPage() {
               cursor={"pointer"}
               _hover={{ bgColor: "#1877f2" }}
               fontWeight={"bold"}
+              onClick={() => forget()}
             >
               Send login link
             </Button>

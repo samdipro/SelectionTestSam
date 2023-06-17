@@ -62,15 +62,6 @@ db.Comment.belongsTo(db.Post, {
 db.Post.belongsTo(db.User, {
   foreignKey: "user_id",
 });
-
-db.Like.belongsTo(db.User, {
-  foreignKey: "user_id",
-  targetKey: "id",
-});
-db.Like.belongsTo(db.Post, {
-  foreignKey: "post_id",
-  targetKey: "id",
-});
 db.Comment.belongsTo(db.User, {
   foreignKey: "user_id",
   targetKey: "id",
@@ -79,6 +70,15 @@ db.Comment.belongsTo(db.Post, {
   foreignKey: "post_id",
   targetKey: "id",
 });
+db.Like.belongsTo(db.User, {
+  foreignKey: "user_id",
+  targetKey: "id",
+});
+db.Like.belongsTo(db.Post, {
+  foreignKey: "post_id",
+  targetKey: "id",
+});
+
 db.Post.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
 
 module.exports = db;

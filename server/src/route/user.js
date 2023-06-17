@@ -11,7 +11,8 @@ router.get("/gbt", userController.getByToken);
 
 // verify
 router.get("/verify", userController.reqVerify); // verify request
-router.patch("/token/verify", userController.getByToken, userController.verify); //verify from email
+router.get("/verify/:token", userController.verify); // verifying
+// router.patch("/token/verify", userController.getByToken, userController.verify); //verify from email
 
 // edit profile
 router.patch(
@@ -22,11 +23,12 @@ router.patch(
 
 // reset password request
 router.get("/forget", userController.forgetPass);
-router.patch(
-  "/token/change",
-  userController.getByToken,
-  userController.changePass
-); // reset password
+router.patch("/change/:token", userController.changePass);
+// router.patch(
+//   "/token/change",
+//   userController.getByToken,
+//   userController.changePass
+// ); // reset password
 
 // avatar upload
 router.post(

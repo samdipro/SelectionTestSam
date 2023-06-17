@@ -11,6 +11,7 @@ function userReducer(state = init, action) {
       email: action.payload.email,
       name: action.payload.name,
       username: action.payload.username,
+      bio: action.payload.bio,
       avatar_url: action.payload.avatar_url,
     };
   } else if (action.type == "logout") {

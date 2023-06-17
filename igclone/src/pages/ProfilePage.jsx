@@ -246,7 +246,7 @@ export default function ProfilePage() {
           <Center width={"100%"} padding={"0 16px 16px 16px"}>
             <Flex flexDir={"column"} width={"100%"}>
               <Text fontWeight={"bold"}>{userSelector.name}</Text>
-              <Text>Bio</Text>
+              <Text>{userSelector.bio}</Text>
             </Flex>
           </Center>
           <Flex flexWrap={"wrap"} gap={"4px"}>

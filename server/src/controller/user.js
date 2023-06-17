@@ -51,7 +51,7 @@ const userController = {
       mailer({
         subject: "Verify Account",
         to: user.dataValues.email, //email untuk verify
-        text: url_verif + generateToken,
+        text: "please verfy using this link:" + url_verif + generateToken,
       });
       return await db.User.findOne().then((result) => {
         res.send(result);
@@ -280,9 +280,40 @@ const userController = {
   },
   changePass: async (req, res) => {
     try {
-      const { token } = req.query;
+      const { token } = req.params;
+      // console.log(token);
+      let data = await db.Token.findOne({
+        where: {
+          [Op.and]: [
+            {
+              token,
+            },
+            {
+              expired: {
+                [Op.gt]: moment("00:00:00", "hh:mm:ss").format(),
+                [Op.lte]: moment().add(1, "d").format(),
+              },
+            },
+            {
+              valid: true,
+            },
+          ],
+        },
+      });
+
+      console.log(data.dataValues.payload);
+
+      // const user = await db.User.findOne({
+      //   where: {
+      //     id: data.dataValues.payload,
+      //   },
+      // });
+
       const { password } = req.body;
-      const { id } = req.user;
+      console.log(password);
+      // const id = data.dataValues.payload;
+      const id = JSON.parse(data.dataValues.payload);
+      console.log(id.id);
       const hashPassword = await bcrypt.hash(password, 10);
       await db.User.update(
         {
@@ -290,7 +321,7 @@ const userController = {
         },
         {
           where: {
-            id,
+            id: id.id,
           },
         }
       );
@@ -306,7 +337,7 @@ const userController = {
       );
       await db.User.findOne({
         where: {
-          id,
+          id: id.id,
         },
       }).then((result) => {
         res.send(result);
@@ -369,8 +400,30 @@ const userController = {
   },
   verify: async (req, res) => {
     try {
-      const { token } = req.query;
-      const { id } = req.user;
+      const { token } = req.params;
+      // console.log(token);
+      let data = await db.Token.findOne({
+        where: {
+          [Op.and]: [
+            {
+              token,
+            },
+            {
+              expired: {
+                [Op.gt]: moment("00:00:00", "hh:mm:ss").format(),
+                [Op.lte]: moment().add(1, "d").format(),
+              },
+            },
+            {
+              valid: true,
+            },
+          ],
+        },
+      });
+
+      console.log(data.dataValues.payload);
+
+      const id = data.dataValues.payload;
       await db.User.update(
         {
           verified: true,

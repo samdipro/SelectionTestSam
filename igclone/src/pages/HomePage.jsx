@@ -19,7 +19,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Flex flexDir={"column"} gap={"16px"}>
+      <Flex flexDir={"column"} gap={"16px"} paddingBottom={"48px"}>
         <TopBar></TopBar>
         {post.length
           ? post.map((val) => {

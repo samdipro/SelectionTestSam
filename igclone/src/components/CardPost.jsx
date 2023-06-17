@@ -30,11 +30,11 @@ export default function CardPost(props) {
             alignItems={"center"}
           >
             <Avatar
-              src={props.val.User.avatar_url}
+              src={props.val.User?.avatar_url}
               width={"32px"}
               height={"32px"}
             ></Avatar>
-            <Box width={"70%"}>{props.val.User.name}</Box>
+            <Box width={"70%"}>{props.val.User?.name}</Box>
             <Box>
               <Icon _hover={{ cursor: "pointer" }} as={SlOptions}></Icon>
             </Box>

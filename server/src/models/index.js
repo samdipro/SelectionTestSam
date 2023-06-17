@@ -53,12 +53,6 @@ db.Post = require("./post")(sequelize, Sequelize);
 db.Comment = require("./comment")(sequelize, Sequelize);
 db.Like = require("./like")(sequelize, Sequelize);
 
-db.Comment.belongsTo(db.User, {
-  foreignKey: "user_id",
-});
-db.Comment.belongsTo(db.Post, {
-  foreignKey: "post_id",
-});
 db.Post.belongsTo(db.User, {
   foreignKey: "user_id",
 });

@@ -29,7 +29,7 @@ import Navbar from "../components/Navbar";
 import CardProfile from "../components/CardProfile";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { api } from "../api/api";
 
 export default function ProfilePage() {
@@ -42,6 +42,7 @@ export default function ProfilePage() {
   const inputFileRef = useRef(null);
   const [image, setImage] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const postModal = useDisclosure();
 
   const [profile, setProfile] = useState({
     // ...userSelector,
@@ -125,6 +126,22 @@ export default function ProfilePage() {
     };
     reader.readAsDataURL(file);
   };
+
+  const [all, setAll] = useState([]);
+  async function getPost() {
+    await api
+      .get("/post/getpost", {
+        params: { id: userSelector.id },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAll(res.data);
+      });
+  }
+
+  useEffect(() => {
+    getPost();
+  }, []);
 
   return (
     <>
@@ -255,21 +272,24 @@ export default function ProfilePage() {
             </Flex>
           </Center>
           <Flex flexWrap={"wrap"} gap={"4px"}>
-            <Box width={"32%"}>
-              <CardProfile></CardProfile>
-            </Box>
-            <Box width={"32%"}>
-              <CardProfile></CardProfile>
-            </Box>
-            <Box width={"32%"}>
-              <CardProfile></CardProfile>
-            </Box>
-            <Box width={"32%"}>
-              <CardProfile></CardProfile>
-            </Box>
-            <Box width={"32%"}>
-              <CardProfile></CardProfile>
-            </Box>
+            {all.length
+              ? all.map((val) => {
+                  return (
+                    <Box
+                      width={"32%"}
+                      onClick={() => {
+                        postModal.onOpen();
+                      }}
+                    >
+                      <CardProfile
+                        isOpen={postModal.isOpen}
+                        onClose={postModal.onClose}
+                        val={val}
+                      ></CardProfile>
+                    </Box>
+                  );
+                })
+              : null}
           </Flex>
         </Flex>
       </Container>

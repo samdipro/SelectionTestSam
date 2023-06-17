@@ -6,7 +6,7 @@ const postController = require("../controller").postController;
 //post
 router.post(
   "/",
-  fileUploader({ destinationFolder: "post" }).single("post"),
+  fileUploader({ destinationFolder: "Post" }).single("Post"),
   postController.insertPost
 );
 

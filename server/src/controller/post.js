@@ -10,8 +10,9 @@ const url_postIMG = process.env.URL_POSTIMG;
 const postController = {
   insertPost: async (req, res) => {
     try {
+      console.log("masuk");
       const { caption, user_id } = req.body;
-      const { filename } = req.file;
+      const filename = req?.file.filename;
 
       await db.Post.create({
         image: url_postIMG + filename,

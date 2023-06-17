@@ -8,10 +8,18 @@ export default function Verify() {
   const nav = useNavigate();
   const { token } = useParams();
   console.log(token);
-  useEffect(async () => {
+  // useEffect(async () => {
+  //   await api.get("/verify", {
+  //     params: {
+  //       token: token,
+  //     },
+  //   });
+  //   console.log("erorr");
+  // }, []);
+  async function verify() {
     await api.get("/user/verify/" + token);
-  }, []);
-
+    nav("/home");
+  }
   return (
     <>
       <Container
@@ -23,9 +31,16 @@ export default function Verify() {
         justifyContent={"center"}
       >
         <Flex flexDir={"column"}>
-          <Center fontSize={"1rem"}>Your account is verified</Center>
-          <Button colorScheme="green" onClick={() => nav("/home")}>
-            Back to Home
+          <Center fontSize={"1rem"}>
+            Click the button to verify your account
+          </Center>
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              verify();
+            }}
+          >
+            Verify my account
           </Button>
         </Flex>
       </Container>

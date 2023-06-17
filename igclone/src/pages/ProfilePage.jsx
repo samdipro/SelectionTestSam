@@ -21,6 +21,7 @@ import {
   useDisclosure,
   Input,
   useToast,
+  FormControl,
 } from "@chakra-ui/react";
 import { BsGearWide, BsPersonAdd } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -184,11 +185,11 @@ export default function ProfilePage() {
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay>
                   <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
+                    <ModalHeader>Edit Profile</ModalHeader>
                     <ModalCloseButton />
 
                     <ModalBody>
-                      <Flex flexDir={"column"}>
+                      <Flex flexDir={"column"} gap={"6px"}>
                         <Input
                           id="name"
                           placeholder="Full Name"
@@ -216,13 +217,17 @@ export default function ProfilePage() {
                           type="file"
                           display="none"
                         />
-                        <Avatar
-                          src={image}
-                          size={"xl"}
-                          onClick={() => {
-                            inputFileRef.current.click();
-                          }}
-                        />
+                        <Flex padding={"8px 0"} flexDir={"column"}>
+                          <Avatar
+                            cursor={"pointer"}
+                            src={image}
+                            size={"xl"}
+                            onClick={() => {
+                              inputFileRef.current.click();
+                            }}
+                          />
+                          <Text>clik the picture to change</Text>
+                        </Flex>
                       </Flex>
                     </ModalBody>
 

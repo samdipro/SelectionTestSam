@@ -12,6 +12,7 @@ function userReducer(state = init, action) {
       name: action.payload.name,
       username: action.payload.username,
       bio: action.payload.bio,
+      verified: action.payload.verified,
       avatar_url: action.payload.avatar_url,
     };
   } else if (action.type == "logout") {

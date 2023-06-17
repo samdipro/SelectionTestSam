@@ -10,4 +10,6 @@ router.post(
   postController.insertPost
 );
 
+router.get("/getpost", postController.getPost);
+
 module.exports = router;

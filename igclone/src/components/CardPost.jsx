@@ -1,13 +1,25 @@
-import { Avatar, Box, Container, Flex, Icon, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Container,
+  Flex,
+  Icon,
+  Text,
+  Image,
+} from "@chakra-ui/react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import { TbSend } from "react-icons/tb";
 import { SlOptions } from "react-icons/sl";
 import { RxBookmark, RxBookmarkFilled } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-export default function CardPost() {
+export default function CardPost(props) {
   const userSelector = useSelector((state) => state.auth);
+  useEffect(() => {
+    console.log(props);
+  }, []);
   return (
     <>
       <Container maxW={"400px"}>
@@ -18,11 +30,11 @@ export default function CardPost() {
             alignItems={"center"}
           >
             <Avatar
-              // src={userSelector.avatar_url}
+              src={props.val.User.avatar_url}
               width={"32px"}
               height={"32px"}
             ></Avatar>
-            <Box width={"70%"}>Name</Box>
+            <Box width={"70%"}>{props.val.User.name}</Box>
             <Box>
               <Icon _hover={{ cursor: "pointer" }} as={SlOptions}></Icon>
             </Box>
@@ -33,8 +45,9 @@ export default function CardPost() {
             minW={"300px"}
             // minH={"300px"}
           >
-            <img
-              src="https://www.adweek.com/wp-content/uploads/files/head_3.png"
+            <Image
+              src={props.val.Image}
+              width={"100%"}
               alt=""
               style={{
                 boxShadow:
@@ -66,7 +79,7 @@ export default function CardPost() {
             </Box>
           </Flex>
           <Text>Count Like</Text>
-          <Flex>caption</Flex>
+          <Flex>{props.val.caption}</Flex>
           <Flex>comment</Flex>
         </Box>
       </Container>

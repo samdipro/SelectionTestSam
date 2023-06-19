@@ -30,11 +30,4 @@ router.patch("/change/:token", userController.changePass);
 //   userController.changePass
 // ); // reset password
 
-// avatar upload
-router.post(
-  "/image/v1/:id",
-  fileUploader({ destinationFolder: "Avatar" }).single("Avatar"),
-  userController.uploadAvatar
-);
-
 module.exports = router;
